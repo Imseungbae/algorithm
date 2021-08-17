@@ -5,6 +5,7 @@ def binarySerch(arr, target, start, end):
         mid = (start+end)//2
 
         if target == arr[mid]:
+            print(mid)
             return mid
         elif target < arr[mid]:
             return binarySerch(arr, target, start, mid-1)
@@ -14,6 +15,6 @@ def binarySerch(arr, target, start, end):
 
 
 arr = [2,4,6,8,10,12,14,16,18]
-target = 4
+target = 8
 
-print(binarySerch(arr,4,0,len(arr)-1))
+print(binarySerch(arr, target, 0, len(arr)-1))
