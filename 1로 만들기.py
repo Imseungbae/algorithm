@@ -1,14 +1,18 @@
-d = [0] * 30001
-def makeOne(X):
-    if X==1:
-        return 0
-    value = makeOne(X-1) + 1 
-    if X%3==0:
-        return min(value, makeOne(X//3) + 1)
-    if X%2==0:
-        return min(value, makeOne(X//2)) + 1
-    if X%5==0:
-        return min(value,makeOne(X//5)+1)
+# Bottom UP 방식 이용
+dp = [0] * 30001
 
-N = int(input())
-print(makeOne(N))
+dp[1] = 0
+dp[2] = 1
+
+n = int(input())
+
+for i in range(2, n + 1):
+    dp[i] = dp[i-1] + 1
+    if i%2 == 0:
+        dp[i] = min(dp[i], dp[i//2] + 1)
+    if i%3 == 0:
+        dp[i] = min(dp[i], dp[i//3] + 1)
+    if i%5 == 0:
+        dp[i] = min(dp[i], dp[i//5] + 1)
+
+print(dp[n])
