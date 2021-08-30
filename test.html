@@ -1,0 +1,40 @@
+<script src="jquery-3.6.0.min.js"></script>
+<!-- <script>
+    
+    $.ajax({
+         url:"http://localhost:8080/response/hello"
+        , type:"POST"
+        // , data:JSON.stringify({"id":"d"})
+        // , contentType: "application/json"
+        , success: function(result) {
+             if (result) {
+                  alert("성공했습니다."); } else { alert("잠시 후에 시도해주세요."); } }, error: function() { alert("에러 발생"); } })
+</script> -->
+
+<script>
+    function sleep(ms) {
+        const wakeUpTime = Date.now() + ms;
+        while (Date.now() < wakeUpTime) {} 
+    }
+
+    for(let i=0; i<20; i++){
+        $.ajax({
+            url: 'http://127.0.0.1:8080/response/hello',
+            headers: {
+                'Content-Type': 'application/x-www-form-urlencoded'
+            },
+            type: "POST", /* or type:"GET" or type:"PUT" */
+            dataType: "json",
+            data: {
+                'test' : 'test'
+            },
+            success: function (result) {
+                console.log(result);
+            },
+            error: function () {
+                console.log("error");
+            }
+        });
+        sleep(10);
+    }
+</script>
