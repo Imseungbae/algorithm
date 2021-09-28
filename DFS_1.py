@@ -1,24 +1,44 @@
-from collections import deque
-n,m = map(int,input().split())
-graph = []
-dq = deque([(0, 0, 2)])
-cnt = 0
-for _ in range(n):
-    graph.append(list(map(int,input().split())))
+# DFS 구현하기
 
-def bfs(cnt):
-    while dq:
-        (x,y,z) = dq.popleft()
-        cnt = z
-        if x<0 or x>=n or y<0 or y>=m:
-            continue
-        if graph[x][y] == 1:
-            graph[x][y] = cnt
-            dq.append( (x, y+1, cnt+1) ) #동
-            dq.append( (x-1, y, cnt+1) ) #남
-            dq.append( (x, y-1, cnt+1) ) #서
-            dq.append( (x+1, y, cnt+1) )  #북
-    
+import sys
+input = sys.stdin.readline
 
-bfs(0)
-print(graph[n-1][m-1] -1)
+# 노드와 간선 입력받기
+v, e = map(int, input().split())
+# 방문리스트
+visit = [False] * (v+1)
+graph = [ [] for i in range(v+1)]
+# 그래프 입력받기
+for i in range(1, e):
+    a = list(map(int, input().split()))
+    graph[i] = a
+
+# print( graph )
+
+def dfs(graph, visit, node) :
+    visit[node] = True
+    print( node, end=' ' )
+    for i in graph[node]:
+        # 미방문
+        if visit[i] == False:
+            visit[i] = True
+            dfs(graph, visit, i)
+        # 방문
+        else:
+            pass
+dfs(graph, visit, 1)
+
+
+# 입력값
+# 8 9
+# 2 3 8
+# 1 7
+# 1 4 5
+# 3 5
+# 3 4
+# 7
+# 2 6 8
+# 1 7
+
+# 출력값
+# 1 2 7 6 8 3 4 5 
