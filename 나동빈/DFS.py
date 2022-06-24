@@ -12,28 +12,30 @@
 [[[[[[[[[출력값]]]]]]]]]
 1 2 7 6 8 3 4 5 
 '''
-
-
-import sys
+import sys, heapq
 input = sys.stdin.readline
-INF = int(1e9)
 
-v, e = map(int, input().split())
-# graph = [[] for _ in range(v+1)]
-visit = [False] * (v+1)
+n, m = map(int, input().split())
 graph = [[]]
-
-for _ in range(v):
+for _ in range(n):
     graph.append(list(map(int, input().split())))
 
-print(graph)
+visited = [False] * (n+1)
 
-def DFS(v):
-    visit[v] = True
-    print(v, end=' ')
+def bfs(start):
+    q = []
+    visited[start] = True
+    q.append(start)
 
-    for i in graph[v]:
-        if not visit[i]:
-            DFS(i)
+    while q:
+        now = heapq.heappop(q)
 
-DFS(8)
+        for node in graph[now]:
+            if not visited[node]:
+                heapq.heappush(q, node)
+                visited[node] = True
+                print(node, "방문")
+
+start = 1
+print(start, "방문")
+bfs(start)
